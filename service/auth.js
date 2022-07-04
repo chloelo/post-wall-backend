@@ -17,15 +17,17 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
   const decoded = await new Promise((resolve, reject) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
       if (err) {
+        if (err.name === 'TokenExpiredError') {
+          return next(appError(401, '你的登入時效已過期！', next));
+        }
         reject(err)
       } else {
         resolve(payload)
       }
     })
   })
-  const currentUser = await User.findById(decoded.id);
-
-  req.user = currentUser;
+  // req.user = await User.findById(decoded.id);
+  req.authId = decoded.id;
   next();
 });
 

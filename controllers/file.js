@@ -1,4 +1,4 @@
-const { successHandle } = require('../service')
+const successHandle = require('../service/successHandle')
 const { appError } = require("../service/exceptions");
 const handleErrorAsync = require("../service/handleErrorAsync");
 const sizeOf = require('image-size'); // 偵測圖片大小

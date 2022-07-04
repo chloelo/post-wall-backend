@@ -8,9 +8,9 @@ const upload = multer({
   },
   fileFilter(req, file, cb) {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg') {
+    if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg' && ext !== '.gif') {
 
-      cb(appError("400", "檔案格式錯誤，僅限上傳 jpg、jpeg 與 png 格式。"));
+      cb(appError(400, "檔案格式錯誤，僅限上傳 jpg、jpeg、png 與 gif 格式。"));
     }
     cb(null, true);
   },

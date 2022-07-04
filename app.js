@@ -8,11 +8,11 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const uploadRouter = require('./routes/upload');
-const { notFoundHandle } = require('./service');
 const { 
   unhandledRejection,
   uncaughtException,
-  handleErrorRes 
+  handleErrorRes,
+  notFoundHandle 
 } = require('./service/exceptions');
 const app = express();
 
