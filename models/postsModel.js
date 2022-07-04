@@ -31,6 +31,7 @@ const postSchema = new mongoose.Schema(
     // 要加以下條件，搭配下方的 virtual，才可以在 populate 的時候成功產出虛擬欄位
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    id: false
   }
 );
 // 掛一個虛擬的欄位 (類存在、類相依、類組合)
