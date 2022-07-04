@@ -11,12 +11,12 @@ const commentSchema = new mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'user',
+      ref: 'User',
       require: ['true', 'user must belong to a post.']
     },
     post: {
       type: mongoose.Schema.ObjectId,
-      ref: 'post',
+      ref: 'Post',
       require: ['true', 'comment must belong to a post.']
     }
   }, {
@@ -26,6 +26,7 @@ const commentSchema = new mongoose.Schema(
 // /^find/ 正規表達式，表示 find 開頭
 // 只要是 find 開頭的方法， findAndUpdate(),findID...都是符合的
 // 前置器，前台有用到 find collection 語法就會觸發
+// 如果沒有這段 populate，user 欄位就只會顯示預設的 ObjectId
 commentSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
