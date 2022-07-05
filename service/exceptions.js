@@ -56,6 +56,10 @@ const handleErrorRes = (err, req, res, next) => {
     err.message = "欄位格式錯誤"
     err.isOperational = true;
   }
+  if (err.name === 'MulterError' && err.code === 'LIMIT_FILE_SIZE') {
+    err.message = "上傳檔案已超過限制 2mb"
+    err.isOperational = true;
+  }
   if (err.name === 'CastError') {
     err.message = "路徑找不到此 ID，請再次確認！"
     err.isOperational = true;
@@ -71,9 +75,18 @@ const handleErrorRes = (err, req, res, next) => {
   // production
   resErrorProd(err, res)
 }
+const notFoundHandle = (req, res) => {
+  res.status(404).send({
+    "status": false,
+    "message": '無此網站路由'
+  });
+  res.end();
+}
+
 module.exports = {
   appError,
   unhandledRejection,
   uncaughtException,
-  handleErrorRes
+  handleErrorRes,
+  notFoundHandle
 }
