@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "bf77633c-4055-43fd-88bb-225c43dc3438",
+		"name": "post-wall",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16938975"
+	},
+	"item": [
+		{
+			"name": "會員功能",
+			"item": [
+				{
+					"name": "註冊新帳號",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"dd@dd.cc\",\r\n    \"password\":\"qwer1234\",\r\n    \"confirmPassword\":\"qwer1234\",\r\n    \"name\":\"I am ddd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/sign_up",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "登入",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"email\":\"aa@aa.cc\",\r\n    \"password\":\"qwer1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/sign_in",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更改密碼",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"password\":\"qwer1235\",\r\n    \"confirmPassword\":\"qwer1235\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user/password",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人資料",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/user/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新個人資料",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"我是 aa 誒誒誒\",\r\n    \"sex\":\"male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user/profile",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "會員按讚追蹤動態",
+			"item": [
+				{
+					"name": "取得個人追蹤名單",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/user/following",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人按讚列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/user/like_list",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"like_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "追蹤朋友",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/user/:id/following",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								":id",
+								"following"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消追蹤朋友",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/user/:id/following",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								":id",
+								"following"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "動態貼文",
+			"item": [
+				{
+					"name": "取得所有貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/posts",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人所有貼文列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/posts/user/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"posts",
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/post/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"趕快把作品弄一弄啊\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/post",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的留言",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\"我不能同意你再多了~~\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/post/:id/comment",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id",
+								"comment"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的讚",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/post/:id/like",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消一則貼文的讚",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/post/:id/like",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改一則貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"你準備好了沒\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/post/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "62973262d76ca70a03421dd3",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/posts",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除一筆貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/post/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "其他",
+			"item": [
+				{
+					"name": "上傳圖片",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/file/image",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"file",
+								"image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
