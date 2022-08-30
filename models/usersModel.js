@@ -50,7 +50,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["member", "admin", "super-admin"],
       default: "member"
-    }
+    },
+    googleId: String
   },
   {
     versionKey: false,

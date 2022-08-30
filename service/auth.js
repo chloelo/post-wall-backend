@@ -45,8 +45,19 @@ const generateSendJWT = (user, statusCode, res) => {
     }
   });
 }
+const generateUrlJWT= (user,res) => {
+  // 產生 JWT token
+  const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{
+    expiresIn: process.env.JWT_EXPIRES_DAY
+  });
+  user.password = undefined // 保險起見
+  // 重新導向到前端，如果是 heroku url or github-pages, 記得要用絕對路徑把正確 url 加上
+  // 前端再從網址取得 token
+  res.redirect(`/callback?token=${token}&name=${user.name}`)
+}
 
 module.exports = {
   isAuth,
-  generateSendJWT
+  generateSendJWT,
+  generateUrlJWT
 }
