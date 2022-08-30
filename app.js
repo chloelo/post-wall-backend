@@ -20,7 +20,7 @@ const app = express();
 process.on('uncaughtException', uncaughtException);
 
 require('./connections')
-
+require('./connections/passport')
 
 app.use(cors())
 app.use(logger('dev'));
