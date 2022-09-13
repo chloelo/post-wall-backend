@@ -6,7 +6,7 @@ const upload = multer({
   limits: {
     fileSize: 2*1024*1024, // 2mb
   },
-  fileFilter(req, file, cb) {
+  fileFilter(req, file, cb) { // cb = callback
     const ext = path.extname(file.originalname).toLowerCase();
     if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg' && ext !== '.gif') {
 

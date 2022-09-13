@@ -51,7 +51,8 @@ const userSchema = new mongoose.Schema(
       enum: ["member", "admin", "super-admin"],
       default: "member"
     },
-    googleId: String
+    googleId: String,
+    facebookId: String
   },
   {
     versionKey: false,

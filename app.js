@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cors = require('cors')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const thirdPartyRouter = require('./routes/thirdPartyAuth');
 const postsRouter = require('./routes/posts');
 const uploadRouter = require('./routes/upload');
 const { 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api', usersRouter);
+app.use('/api', thirdPartyRouter);
 app.use('/api', postsRouter);
 app.use('/api', uploadRouter)
 app.use(notFoundHandle);
