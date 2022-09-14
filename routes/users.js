@@ -31,18 +31,18 @@ router.post('/user/:id/following', isAuth, usersController.addFollowing);
 // 取消追蹤朋友
 router.delete('/user/:id/following', isAuth, usersController.deleteFollowing);
 
-router.get('/user/google', passport.authenticate('google', {
-  scope: ['email', 'profile'],
-}))
+// router.get('/user/google', passport.authenticate('google', {
+//   scope: ['email', 'profile'],
+// }))
 
-// 因為前後端分離，所以不會傳 session, 這邊不設定 false 會噴錯，預設是 true
-//                                這是 passport 的 middleware, 會去跑我們設定的 passport.js       
-router.get('/user/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
-  // res.send({
-	// 	status:true,
-	// 	data:req.user
-	// })
-  generateUrlJWT(req.user, res)
-})
+// // 因為前後端分離，所以不會傳 session, 這邊不設定 false 會噴錯，預設是 true
+// //                                這是 passport 的 middleware, 會去跑我們設定的 passport.js 的 callback function      
+// router.get('/user/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+//   // res.send({
+// 	// 	status:true,
+// 	// 	data:req.user
+// 	// })
+//   generateUrlJWT(req.user, res)
+// })
 
 module.exports = router;

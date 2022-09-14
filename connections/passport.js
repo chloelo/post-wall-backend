@@ -1,31 +1,32 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const bcrypt = require('bcryptjs');
+const FacebookStrategy = require('passport-facebook');
 
-const User = require('../models/usersModel')
+const thirdPartyController = require('../controllers/thirdPartyAuth')
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:4000/api/user/google/callback"
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+    // https://post-wall-backend.vercel.app/api/user/facebook/callback
+    // http://localhost:4000/api/user/google/callback
   },
   async (accessToken, refreshToken, profile, cb) => {
-    console.log('profile 111', profile)
-    const user = await User.findOne({ googleId: profile.id})
-    if(user){
-      console.log('使用者已存在')
-      return cb(null, user)
-    }
-    const password = await bcrypt.hash(process.env.GOOGLE_PASSPORT_SECRET, 12)
-    const newUser =  await User.create({
-      email: profile.emails[0].value,
-      name: profile.displayName,
-      password,
-      googleId:profile.id
-    })
-    return cb(null, newUser)
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
+    console.log('profile: ', profile)
+    return(null, await thirdPartyController.checkUserId('googleId', profile))
   }
 ));
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+  // 'http://localhost:4000/api/user/facebook/callback',
+  profileFields: ['id', 'displayName', 'photos', 'email'],
+  enableProof: true
+  },
+  async (accessToken, refreshToken, profile, cb) => {
+    console.log('fb profile: ', profile)
+    return(null, await thirdPartyController.checkUserId('facebookId', profile))
+  }
+)); 

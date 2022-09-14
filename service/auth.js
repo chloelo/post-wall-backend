@@ -45,9 +45,9 @@ const generateSendJWT = (user, statusCode, res) => {
     }
   });
 }
-const generateUrlJWT= (user,res) => {
+const generateUrlJWT = (user, res) => {
   // 產生 JWT token
-  const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_DAY
   });
   user.password = undefined // 保險起見
