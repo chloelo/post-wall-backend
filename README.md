@@ -8,7 +8,7 @@
 - 語言：Node.js
 - 框架：Express
 - 資料庫：MongoDB
-- 雲平台：HEROKU
+- 雲平台：Vercel
 
 ### Installation 📦
 ```sh
